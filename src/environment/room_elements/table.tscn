@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://d0cpdr6qnpuu6"]
+
+[ext_resource type="PackedScene" uid="uid://fu87cxgbfw7x" path="res://assets/models/table.glb" id="1_7ftjv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1qwt1"]
+
+[node name="table" unique_id=2040137927 instance=ExtResource("1_7ftjv")]
+
+[node name="table(Clone)" parent="." index="0" unique_id=1540393415]
+material_override = SubResource("StandardMaterial3D_1qwt1")
