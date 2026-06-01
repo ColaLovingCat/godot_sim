@@ -20,89 +20,89 @@ description: HD-2D 桌游模拟经营项目开发指南
 
 ```Text
 /godot_sim
-├── assets/                # 原始资源
-│   ├── sprites/           # 2D 像素角色、家具、图标
-│   │   ├── characters/    # NPC/玩家角色精灵表
+├── assets/                             # 原始资源
+│   ├── sprites/                        # 2D 像素角色、家具、图标
+│   │   ├── characters/                 # NPC/玩家角色精灵表
 │   │   │   ├── player/
 │   │   │   └── npc/
-│   │   ├── furniture/     # 家具图标/精灵
+│   │   ├── furniture/                  # 家具图标/精灵
 │   │   │   ├── table.png
 │   │   │   ├── chair.png
 │   │   │   └── shelf.png
-│   │   └── ui/            # UI 图标
-│   ├── materials/         # 3D 材质 (用于控制像素画贴图在 3D 中的表现，如无过滤、法线贴图)
+│   │   └── ui/                         # UI 图标
+│   ├── materials/                      # 3D 材质 (用于控制像素画贴图在 3D 中的表现，如无过滤、法线贴图)
 │   │   ├── pixel_unshaded.tres
 │   │   └── pixel_lit.tres
-│   ├── models/            # 建筑组件、地板、天花板
-│   ├── music/             # 背景音乐
-│   └── sfx/               # 音效
+│   ├── models/                         # 建筑组件、地板、天花板
+│   ├── music/                          # 背景音乐
+│   └── sfx/                            # 音效
 │       ├── place_furniture.wav
 │       ├── dice_roll.wav
 │       └── coin.wav
-├── src/                   # 核心代码逻辑
-│   ├── components/        # 实体通用行为组件 (纯逻辑节点，附加到实体下)
-│   │   ├── grid_occupier.gd    # 占用网格逻辑
-│   │   ├── interactable.gd     # 玩家交互响应区 (Area3D/Area2D)
-│   │   ├── sit_point.gd        # NPC 坐下位置计算
-│   │   └── item_container.gd   # 容器逻辑 (用于架子存放桌游)
-│   ├── environment/       # HD-2D 专门的环境与光影模块
-│   │   ├── camera/        # 摄像机控制器 (处理正交/透视切换、跟随、视角旋转)
+├── src/                                # 核心代码逻辑
+│   ├── components/                     # 实体通用行为组件 (纯逻辑节点，附加到实体下)
+│   │   ├── grid_occupier.gd            # 占用网格逻辑
+│   │   ├── interactable.gd             # 玩家交互响应区 (Area3D/Area2D)
+│   │   ├── sit_point.gd                # NPC 坐下位置计算
+│   │   └── item_container.gd           # 容器逻辑 (用于架子存放桌游)
+│   ├── environment/                    # HD-2D 专门的环境与光影模块
+│   │   ├── camera/                     # 摄像机控制器 (处理正交/透视切换、跟随、视角旋转)
 │   │   │   ├── hd2d_camera.gd
 │   │   │   └── hd2d_camera.tscn
-│   │   ├── lighting/      # 灯光预设 (白天/黄昏/夜晚光影切换)
+│   │   ├── lighting/                   # 灯光预设 (白天/黄昏/夜晚光影切换)
 │   │   │   └── day_night_cycle.gd
-│   │   ├── post_process/  # WorldEnvironment 后期特效配置 (景深、辉光、色彩校正)
+│   │   ├── post_process/               # WorldEnvironment 后期特效配置 (景深、辉光、色彩校正)
 │   │   │   └── hd2d_env.tres
-│   │   └── room_elements/ # 墙壁、地板的 3D 场景组件
+│   │   └── room_elements/              # 墙壁、地板的 3D 场景组件
 │   │       ├── wall_segment.tscn
 │   │       └── floor_tile.tscn
-│   ├── core/              # 全局单例 (Autoloads)
-│   │   ├── GameManager.gd # 游戏主循环、时间控制
-│   │   ├── EconomyManager.gd # 金钱、声望计算
-│   │   ├── EventBus.gd    # 全局信号中心 (Observer Pattern)
-│   │   └── DataManager.gd # 资源加载、数据持久化
-│   ├── actors/            # 动态实体
-│   │   ├── player/        # 玩家控制
+│   ├── core/                           # 全局单例 (Autoloads)
+│   │   ├── GameManager.gd              # 游戏主循环、时间控制
+│   │   ├── EconomyManager.gd           # 金钱、声望计算
+│   │   ├── EventBus.gd                 # 全局信号中心 (Observer Pattern)
+│   │   └── DataManager.gd              # 资源加载、数据持久化
+│   ├── actors/                         # 动态实体
+│   │   ├── player/                     # 玩家控制
 │   │   │   ├── player.gd
 │   │   │   └── player.tscn
-│   │   └── npc/           # 顾客 AI (行为树、导航)
+│   │   └── npc/                        # 顾客 AI (行为树、导航)
 │   │       ├── npc.gd
 │   │       ├── npc.tscn
-│   │       ├── npc_spawner.gd  # NPC 生成器
-│   │       └── npc_states/     # 状态机状态
+│   │       ├── npc_spawner.gd          # NPC 生成器
+│   │       └── npc_states/             # 状态机状态
 │   │           ├── state_idle.gd
 │   │           ├── state_walk.gd
 │   │           ├── state_sit.gd
 │   │           └── state_play.gd
 │   │
-│   ├── objects/           # 可交互物体 (家具/桌游)
-│   │   ├── furniture/          # 家具
+│   ├── objects/                        # 可交互物体 (家具/桌游)
+│   │   ├── furniture/                  # 家具
 │   │   │   ├── base_furniture.gd
 │   │   │   ├── base_furniture.tscn
 │   │   │   ├── table.gd
 │   │   │   ├── table.tscn
 │   │   │   ├── chair.gd
 │   │   │   └── chair.tscn
-│   │   └── game_stations/      # 特殊的“桌椅组合”逻辑
+│   │   └── game_stations/              # 特殊的“桌椅组合”逻辑
 │   │       ├── game_station.gd
 │   │       └── game_station.tscn
-│   ├── systems/           # 核心经营系统
-│   │   ├── inventory/     # 库存系统 (非常重要)
-│   │   │   ├── inventory_manager.gd  # 管理仓库里的桌游库存
-│   │   │   └── stock_delivery.gd     # 进货快递逻辑
-│   │   ├── time/          # 独立的时间系统
-│   │   │   └── time_system.gd        # 控制游戏内的小时、天数流逝 (影响顾客生成和关店逻辑)
-│   │   ├── building/      # 网格放置系统
+│   ├── systems/                        # 核心经营系统
+│   │   ├── inventory/                  # 库存系统 (非常重要)
+│   │   │   ├── inventory_manager.gd    # 管理仓库里的桌游库存
+│   │   │   └── stock_delivery.gd       # 进货快递逻辑
+│   │   ├── time/                       # 独立的时间系统
+│   │   │   └── time_system.gd          # 控制游戏内的小时、天数流逝 (影响顾客生成和关店逻辑)
+│   │   ├── building/                   # 网格放置系统
 │   │   │   ├── grid.gd
 │   │   │   ├── placement_system.gd
 │   │   │   └── preview_helper.gd
-│   │   ├── pathfinding/   # 导航网格生成
+│   │   ├── pathfinding/                # 导航网格生成
 │   │   │   └── nav_manager.gd
-│   │   └── economy/       # 财务报表逻辑
+│   │   └── economy/                    # 财务报表逻辑
 │   │       ├── transaction.gd
 │   │       └── pricing.gd
-│   ├── ui/                # 用户界面
-│   │   ├── hud/           # 顶部状态栏
+│   ├── ui/                             # 用户界面
+│   │   ├── hud/                        # 顶部状态栏
 │   │   │   ├── top_bar.gd
 │   │   │   ├── top_bar.tscn
 │   │   │   ├── money_display.gd
@@ -113,40 +113,40 @@ description: HD-2D 桌游模拟经营项目开发指南
 │   │   │   ├── shop_menu.gd
 │   │   │   ├── shop_menu.tscn
 │   │   │   └── pause_menu.gd
-│   │   ├── components/         # 复用 UI 组件
+│   │   ├── components/                # 复用 UI 组件
 │   │   │   ├── button_pixel.gd
 │   │   │   └── progress_bar.gd
 │   │   └── notifications/
 │   │       └── toast.gd
-│   └── utils/                  # 工具类
+│   └── utils/                         # 工具类
 │       ├── math_utils.gd
 │       └── signal_waiter.gd
-├── data/                  # 数据驱动相关 (重点)
-│   └── resources/         # 存储家具、桌游数据的 .tres 文件
-│       ├── furniture/          # 家具数据
+├── data/                              # 数据驱动相关 (重点)
+│   └── resources/                     # 存储家具、桌游数据的 .tres 文件
+│       ├── furniture/                 # 家具数据
 │       │   ├── wooden_table.tres
 │       │   ├── fancy_chair.tres
 │       │   └── shelf.tres
-│       ├── boardgames/         # 桌游数据
+│       ├── boardgames/                # 桌游数据
 │       │   ├── catan.tres
 │       │   └── ticket_to_ride.tres
-│       └── npc/                # NPC 类型数据
+│       └── npc/                       # NPC 类型数据
 │           ├── casual.tres
 │           └── hardcore.tres
-├── scenes/                # 按“游戏大阶段”划分
-│   ├── boot/              # 启动与初始化、Logo展示
-│   ├── main_menu/         # 主菜单场景及其独立 UI
-│   └── game_world/        # 实际游玩的主场景 (取代之前的 main_game)
+├── scenes/                            # 按“游戏大阶段”划分
+│   ├── boot/                          # 启动与初始化、Logo展示
+│   ├── main_menu/                     # 主菜单场景及其独立 UI
+│   └── game_world/                    # 实际游玩的主场景 (取代之前的 main_game)
 │       ├── game_world.tscn
-│       └── game_world.gd  # 负责组装 systems, actors, environment
-├── shaders/                    # 自定义着色器
-│   ├── pixel_snap.gdshader     # 像素对齐
-│   └── outline.gdshader        # 描边效果
-├── config/                     # 配置文件
-│   ├── input_map.gd            # 输入映射
-│   └── settings.gd             # 游戏设置
-├── default_bus_layout.tres     # 音频总线配置
-└── project.godot               # 项目配置文件
+│       └── game_world.gd              # 负责组装 systems, actors, environment
+├── shaders/                           # 自定义着色器
+│   ├── pixel_snap.gdshader            # 像素对齐
+│   └── outline.gdshader               # 描边效果
+├── config/                            # 配置文件
+│   ├── input_map.gd                   # 输入映射
+│   └── settings.gd                    # 游戏设置
+├── default_bus_layout.tres            # 音频总线配置
+└── project.godot                      # 项目配置文件
 ```
 
 # 2. 核心技术栈 (Essential Skills)
@@ -309,7 +309,7 @@ description: HD-2D 桌游模拟经营项目开发指南
 
 ## 第一阶段：HD-2D 视觉验证
 
-- [ ] 搭一个 hd2d_camera，放一个 3D 的地板和墙壁，加上一个 Sprite3D 的玩家，加上描边 Shader
+- [ ] 搭一个 hd2d_camera，放一个 3D 的地板和桌子，加上一个 Sprite3D 的玩家，加上描边 Shader
 - [ ] 实现角色在场景中移动，确保像素不模糊、无抖动。
 - [ ] 设置环境光/像素风格光照
 
@@ -317,18 +317,25 @@ description: HD-2D 桌游模拟经营项目开发指南
 
 - [ ] 实现网格吸附逻辑。
 - [ ] 实现“虚影预览”：家具放下前显示红色（不可放）或绿色（可放）。
+- [ ] 放置货架，解锁的桌游会存放在货架上。
 - [ ] **关键**：实现“桌椅绑定”逻辑（椅子靠近桌子自动激活）。
 
 ## 第三阶段：NPC 与游玩循环
 
+- [ ] 开关店状态 open/close。
 - [ ] NPC 生成系统。
-- [ ] NPC 自动寻找“已激活”的桌游站并坐下。
+- [ ] NPC 在柜台领取想玩的桌游后，自动寻找“已激活”的桌椅并坐下。
 - [ ] 游玩计时与金钱结算。
 
 ## 第四阶段：UI 与管理界面
 
 - [ ] 建造菜单（选择不同家具）。
 - [ ] 店铺信息面板（今日盈利、顾客满意度）。
+
+## 第五阶段：辅助性交互
+
+- [ ] 建造或升级 厕所、零食区、休息区等。
+- [ ] 店铺随机生成垃圾等，等待清理，影响满意度。
 
 # 4. 实用代码模板
 
